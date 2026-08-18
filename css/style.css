@@ -204,16 +204,16 @@ h4 { font-size: 1.2rem; }
 .btn:active { transform: translateY(1px); }
 
 .btn--primary {
-  background: var(--clr-primary);
+  background: #65065B;
   color: #fff;
-  box-shadow: 0 8px 22px rgba(15, 118, 110, 0.3);
+  box-shadow: 0 8px 22px rgba(101, 6, 91, 0.3);
 }
 
 .btn--primary:hover {
-  background: var(--clr-primary-dark);
+  background: #7a2b70;
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.38);
+  box-shadow: 0 12px 28px rgba(101, 6, 91, 0.38);
 }
 
 .btn--accent {
@@ -230,12 +230,12 @@ h4 { font-size: 1.2rem; }
 
 .btn--ghost {
   background: transparent;
-  color: var(--clr-primary);
-  border-color: var(--clr-primary);
+  color: #65065B;
+  border-color: #65065B;
 }
 
 .btn--ghost:hover {
-  background: var(--clr-primary);
+  background: #65065B;
   color: #fff;
   transform: translateY(-2px);
 }
@@ -296,28 +296,9 @@ h4 { font-size: 1.2rem; }
 }
 
 .brand__mark {
-  width: 46px;
-  height: 46px;
+  height: 62px;
+  width: auto;
   flex-shrink: 0;
-}
-
-.brand__name {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 700;
-  line-height: 1.05;
-  color: var(--clr-ink);
-}
-
-.brand__tag {
-  display: block;
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--clr-primary);
-  margin-top: 0.2rem;
 }
 
 .nav__links {
@@ -1590,20 +1571,8 @@ h4 { font-size: 1.2rem; }
   max-width: 300px;
 }
 
-.footer-brand__name {
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.05;
-}
-
-.footer-brand__tag {
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--clr-primary-light);
+.footer-brand .brand__mark {
+  height: 56px;
 }
 
 .footer h4 {
@@ -1873,7 +1842,9 @@ h4 { font-size: 1.2rem; }
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .brand__name { font-size: 1.15rem; }
+  .brand__mark {
+    height: 48px;
+  }
 
   .hero-media {
     min-height: clamp(220px, 36vh, 280px);
