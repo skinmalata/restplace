@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="A peaceful scene of rest by calm water">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eaf6f3"/>
+      <stop offset="1" stop-color="#cfe8e3"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ec3b5"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5e9c8"/>
+      <stop offset="1" stop-color="#e6c877"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#sky)"/>
+  <circle cx="480" cy="132" r="58" fill="url(#sun)" opacity="0.9"/>
+  <!-- distant hills -->
+  <path d="M0 330 Q160 250 320 320 T640 300 V480 H0 Z" fill="#aad0c6"/>
+  <path d="M0 360 Q200 300 380 350 T640 340 V480 H0 Z" fill="#8cc2b4"/>
+  <!-- resting tree -->
+  <g>
+    <path d="M220 460 C220 390 205 360 205 320" stroke="#0b3d3a" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <ellipse cx="205" cy="272" rx="88" ry="66" fill="#2f8f7c"/>
+    <ellipse cx="205" cy="268" rx="58" ry="44" fill="#3fae97"/>
+  </g>
+  <!-- person resting against tree -->
+  <g fill="#0b3d3a">
+    <circle cx="238" cy="382" r="16"/>
+    <path d="M222 398 c0 -26 6 -34 16 -34 s16 8 16 34 Z"/>
+    <path d="M238 400 c-14 14 -34 22 -48 34 c-8 7 2 16 10 10 c8 -6 24 -12 38 -12 s30 6 38 12 c8 6 18 -3 10 -10 c-14 -12 -34 -20 -48 -34 Z"/>
+  </g>
+  <!-- water -->
+  <rect y="440" width="640" height="40" fill="url(#water)"/>
+  <path d="M0 452 Q80 446 160 452 T320 452 T480 452 T640 452" stroke="#f5e9c8" stroke-width="4" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <path d="M0 466 Q110 460 220 466 T440 466 T640 466" stroke="#58595b" stroke-width="4" fill="none" opacity="0.35" stroke-linecap="round"/>
+</svg>

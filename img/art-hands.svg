@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Open hands with a glowing heart">
+  <defs>
+    <linearGradient id="hb-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef7f5"/>
+      <stop offset="1" stop-color="#cfe8e3"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#hb-bg)"/>
+  <circle cx="320" cy="240" r="150" fill="#bfe0d7" opacity="0.6"/>
+  <circle cx="320" cy="240" r="112" fill="none" stroke="#c9a227" stroke-width="6" stroke-dasharray="10 14" stroke-linecap="round" opacity="0.7"/>
+  <g fill="#0b3d3a">
+    <path d="M160 340 c-2 -70 26 -120 78 -146 c8 -4 15 6 8 13 c-16 16 -28 40 -34 66 c10 -2 20 -8 28 -14 c6 -5 14 2 9 9 c-16 22 -52 36 -70 52 c-6 5 -16 5 -19 0 Z"/>
+    <path d="M480 340 c2 -70 -26 -120 -78 -146 c-8 -4 -15 6 -8 13 c16 16 28 40 34 66 c-10 -2 -20 -8 -28 -14 c-6 -5 -14 2 -9 9 c16 22 52 36 70 52 c6 5 16 5 19 0 Z"/>
+  </g>
+  <g>
+    <path d="M320 180 c-14 -14 -44 -10 -46 16 c-1 20 20 34 46 54 c26 -20 47 -34 46 -54 c-2 -26 -32 -30 -46 -16 Z" fill="#c9a227"/>
+    <path d="M320 180 c-14 -14 -44 -10 -46 16 c-1 20 20 34 46 54" fill="none" stroke="#c9a227" stroke-width="4" opacity="0.35"/>
+  </g>
+  <path d="M200 420 Q320 460 440 420" stroke="#0f766e" stroke-width="5" fill="none" opacity="0.35" stroke-linecap="round"/>
+</svg>

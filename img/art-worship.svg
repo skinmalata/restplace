@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="A worship scene with hands lifted in a sunrise">
+  <defs>
+    <linearGradient id="ws-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3e9d2"/>
+      <stop offset="1" stop-color="#e6c877"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#ws-sky)"/>
+  <circle cx="320" cy="300" r="120" fill="#f7dfa0"/>
+  <circle cx="320" cy="300" r="150" fill="#f7dfa0" opacity="0.35"/>
+  <g fill="#0b3d3a">
+    <!-- left lifted arm -->
+    <path d="M130 360 q28 -70 66 -118 q8 -10 -6 -12 q-30 -4 -52 24 q-26 32 -32 92" opacity="0.85"/>
+    <circle cx="192" cy="216" r="9"/>
+    <!-- right lifted arm -->
+    <path d="M510 360 q-28 -70 -66 -118 q-8 -10 6 -12 q30 -4 52 24 q26 32 32 92" opacity="0.85"/>
+    <circle cx="448" cy="216" r="9"/>
+  </g>
+  <!-- silhouette ground -->
+  <path d="M0 360 q120 -34 320 -20 q200 14 320 20 V480 H0 Z" fill="#124a45"/>
+  <!-- congregation silhouettes -->
+  <g fill="#0c3a37">
+    <circle cx="150" cy="396" r="16"/>
+    <circle cx="230" cy="404" r="16"/>
+    <circle cx="320" cy="400" r="17"/>
+    <circle cx="410" cy="404" r="16"/>
+    <circle cx="490" cy="396" r="16"/>
+  </g>
+  <path d="M0 452 Q120 444 240 452 T480 452 T640 452" stroke="#c9a227" stroke-width="4" fill="none" opacity="0.6" stroke-linecap="round"/>
+  <!-- rays -->
+  <g stroke="#f7dfa0" stroke-width="6" stroke-linecap="round" opacity="0.8">
+    <path d="M320 150v26"/><path d="M236 190l18 19"/><path d="M404 190l-18 19"/><path d="M200 258l26-3"/><path d="M440 258l-26-3"/>
+  </g>
+</svg>

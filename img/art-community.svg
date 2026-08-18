@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="A group of friends in a warm circle of community">
+  <defs>
+    <linearGradient id="cm-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eaf6f3"/>
+      <stop offset="1" stop-color="#cfe8e3"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#cm-sky)"/>
+  <circle cx="560" cy="70" r="46" fill="#f5e9c8"/>
+  <!-- joined arms ring -->
+  <circle cx="320" cy="300" r="150" fill="none" stroke="#9fcdc0" stroke-width="10" stroke-dasharray="14 18" stroke-linecap="round"/>
+  <circle cx="320" cy="300" r="112" fill="#bfe0d7"/>
+  <path d="M0 380 Q160 330 320 370 T640 350 V480 H0 Z" fill="#2f8f7c" opacity="0.35"/>
+  <!-- people figures -->
+  <g>
+    <g>
+      <circle cx="196" cy="252" r="22" fill="#0b3d3a"/>
+      <path d="M172 292 c0 -34 12 -42 24 -42 s24 8 24 42 c0 8 -6 12 -10 12 h-28 c-4 0 -10 -4 -10 -12 Z" fill="#0b3d3a"/>
+    </g>
+    <g>
+      <circle cx="320" cy="240" r="24" fill="#124a45"/>
+      <path d="M292 284 c0 -36 14 -46 28 -46 s28 10 28 46 c0 9 -7 14 -12 14 h-32 c-5 0 -12 -5 -12 -14 Z" fill="#124a45"/>
+    </g>
+    <g>
+      <circle cx="444" cy="252" r="22" fill="#0b3d3a"/>
+      <path d="M420 292 c0 -34 12 -42 24 -42 s24 8 24 42 c0 8 -6 12 -10 12 h-28 c-4 0 -10 -4 -10 -12 Z" fill="#0b3d3a"/>
+    </g>
+    <!-- children -->
+    <circle cx="268" cy="330" r="14" fill="#3fae97"/>
+    <circle cx="372" cy="330" r="14" fill="#3fae97"/>
+  </g>
+  <!-- ground -->
+  <rect x="0" y="400" width="640" height="80" fill="#f7fbfa"/>
+  <rect x="0" y="400" width="640" height="14" fill="#88c4b6" opacity="0.5"/>
+</svg>
