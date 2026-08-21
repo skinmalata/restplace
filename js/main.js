@@ -128,4 +128,115 @@
     tick();
     setInterval(tick, 1000);
   }
+
+  /* ---------- PWA: service worker ---------- */
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("sw.js").catch(function () {
+        /* Service workers require https or localhost — fail silently */
+      });
+    });
+  }
+
+  /* ---------- PWA: install app button + instructions modal ---------- */
+  var deferredPrompt = null;
+  var overlay = null;
+
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  window.addEventListener("appinstalled", function () {
+    deferredPrompt = null;
+    closeInstallModal();
+  });
+
+  function platformSteps() {
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var isAndroid = /Android/.test(ua);
+
+    if (isIOS) {
+      return [
+        "Open this site in <strong>Safari</strong>.",
+        "Tap the <strong>Share</strong> icon <svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' style='vertical-align:-2px'><path d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'/><path d='M16 6l-4-4-4 4M12 2v13'/></svg> at the bottom of the screen.",
+        "Scroll down and tap <strong>Add to Home Screen</strong>, then tap <strong>Add</strong>."
+      ];
+    }
+    if (isAndroid) {
+      return [
+        "Tap the <strong>&#8942;</strong> menu icon at the top right of your browser.",
+        "Tap <strong>Install app</strong> (or <strong>Add to Home screen</strong>).",
+        "Confirm by tapping <strong>Install</strong> — the app appears on your home screen."
+      ];
+    }
+    return [
+      "Look for the <strong>install icon</strong> <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' style='vertical-align:-2px'><path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg> on the right side of your browser address bar and click it.",
+      "Click <strong>Install</strong> in the popup that appears.",
+      "The Rest Place app opens in its own window, just like a native app."
+    ];
+  }
+
+  function buildInstallModal() {
+    overlay = document.createElement("div");
+    overlay.className = "install-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Download The Rest Place app");
+
+    var stepsHtml = platformSteps()
+      .map(function (step) { return "<li><span>" + step + "</span></li>"; })
+      .join("");
+
+    overlay.innerHTML =
+      '<div class="install-modal">' +
+      '<button type="button" class="install-modal__close" aria-label="Close">&times;</button>' +
+      '<img class="install-modal__icon" src="icon-192.png" alt="The Rest Place Church app icon">' +
+      "<h3>Get The Rest Place App</h3>" +
+      "<p>Sermons, events, giving and the <strong>complete Holy Bible</strong> — installed on your device and available offline.</p>" +
+      '<ol class="install-steps">' + stepsHtml + "</ol>" +
+      '<a href="bible.html" class="btn btn--primary">Read the Bible Now</a>' +
+      "</div>";
+
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay || e.target.closest(".install-modal__close")) {
+        closeInstallModal();
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeInstallModal();
+    });
+  }
+
+  function openInstallModal() {
+    if (!overlay) buildInstallModal();
+    overlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeInstallModal() {
+    if (overlay) {
+      overlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+  }
+
+  document.querySelectorAll("[data-install-app]").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function () {
+          deferredPrompt = null;
+        });
+      } else {
+        openInstallModal();
+      }
+    });
+  });
 })();

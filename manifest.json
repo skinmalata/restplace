@@ -1,0 +1,44 @@
+{
+  "name": "The Rest Place Church",
+  "short_name": "The Rest Place",
+  "description": "The Rest Place Church (CGMi), Port Harcourt — watch sermons, read the complete Holy Bible offline, follow events and give, all in one app.",
+  "id": "the-rest-place-app",
+  "start_url": "./index.html?utm_source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b3d3a",
+  "theme_color": "#0f766e",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["lifestyle", "education", "news"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Holy Bible",
+      "short_name": "Bible",
+      "description": "Read the complete King James Bible offline",
+      "url": "./bible.html?utm_source=pwa-shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Sermons & Media",
+      "short_name": "Sermons",
+      "url": "./sermons.html?utm_source=pwa-shortcut"
+    },
+    {
+      "name": "Give Online",
+      "short_name": "Give",
+      "url": "./give.html?utm_source=pwa-shortcut"
+    },
+    {
+      "name": "Events",
+      "short_name": "Events",
+      "url": "./events.html?utm_source=pwa-shortcut"
+    }
+  ]
+}
