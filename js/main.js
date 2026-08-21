@@ -138,10 +138,24 @@
     });
   }
 
-  /* ---------- PWA: standalone (installed app) detection ---------- */
+  /* ---------- PWA: standalone (installed app) detection ----------
+     Covers three launch contexts:
+     - installed PWA (Chrome/Edge desktop & Android): display-mode media query
+     - iOS home-screen web app: navigator.standalone
+     - our Android APK: its WebView UA ("; wv)") or the utm_source=apk
+       entry link — neither PWA signal exists inside a WebView. */
+  var ua = navigator.userAgent || "";
+  var IS_IOS =
+    /iPad|iPhone|iPod/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var IS_ANDROID = /Android/.test(ua);
+  var IN_APK = (IS_ANDROID && /;\s*wv\)/.test(ua)) ||
+    /[?&]utm_source=apk/.test(window.location.search);
+
   var isStandalone =
     window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone === true;
+    window.navigator.standalone === true ||
+    IN_APK;
 
   /* ---------- In-app splash screen (installed app launches) ----------
      Skipped on iOS: the system already displays the identical startup
@@ -149,10 +163,6 @@
      Skipped on Android: Chrome draws its own native splash from the
      manifest before any page code runs; stacking ours after it would
       mean two splashes back to back. (The APK has a full custom splash.) */
-  var IS_IOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent || "") ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  var IS_ANDROID = /Android/.test(navigator.userAgent || "");
 
   if (isStandalone && !IS_IOS && !IS_ANDROID && !document.querySelector(".app-splash")) {
     var splashEl = document.createElement("div");
