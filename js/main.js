@@ -143,8 +143,14 @@
     window.matchMedia("(display-mode: standalone)").matches ||
     window.navigator.standalone === true;
 
-  /* ---------- In-app splash screen (installed app launches) ---------- */
-  if (isStandalone && !document.querySelector(".app-splash")) {
+  /* ---------- In-app splash screen (installed app launches) ----------
+     Skipped on iOS: the system already displays the identical startup
+     image natively — a second copy here would flash the same artwork twice. */
+  var IS_IOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent || "") ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  if (isStandalone && !IS_IOS && !document.querySelector(".app-splash")) {
     var splashEl = document.createElement("div");
     splashEl.className = "app-splash";
     splashEl.innerHTML = '<img src="splash.png" alt="The Rest Place Church">';
@@ -159,7 +165,7 @@
         setTimeout(function () {
           if (splashEl.parentNode) splashEl.parentNode.removeChild(splashEl);
         }, 550);
-      }, 900);
+      }, 700);
     }
     if (document.readyState === "complete") hideSplash();
     else window.addEventListener("load", hideSplash);
