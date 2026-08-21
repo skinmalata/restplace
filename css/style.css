@@ -2319,3 +2319,27 @@ h4 { font-size: 1.2rem; }
   font-size: 1.25rem;
   line-height: 1;
 }
+
+/* ==========================================================================
+   In-app splash screen (shown while the installed app launches)
+   ========================================================================== */
+.app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #651779;
+}
+
+.app-splash img {
+  width: min(100vw, calc(100dvh * 853 / 1844));
+  max-height: 100dvh;
+  object-fit: contain;
+}
+
+.app-splash.is-fading {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}

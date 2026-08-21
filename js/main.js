@@ -138,9 +138,55 @@
     });
   }
 
+  /* ---------- PWA: standalone (installed app) detection ---------- */
+  var isStandalone =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
+
+  /* ---------- In-app splash screen (installed app launches) ---------- */
+  if (isStandalone && !document.querySelector(".app-splash")) {
+    var splashEl = document.createElement("div");
+    splashEl.className = "app-splash";
+    splashEl.innerHTML = '<img src="splash.png" alt="The Rest Place Church">';
+    document.body.appendChild(splashEl);
+
+    var splashDone = false;
+    function hideSplash() {
+      if (splashDone) return;
+      splashDone = true;
+      setTimeout(function () {
+        splashEl.classList.add("is-fading");
+        setTimeout(function () {
+          if (splashEl.parentNode) splashEl.parentNode.removeChild(splashEl);
+        }, 550);
+      }, 900);
+    }
+    if (document.readyState === "complete") hideSplash();
+    else window.addEventListener("load", hideSplash);
+    setTimeout(hideSplash, 4000); /* safety net */
+  }
+
+  /* ---------- Inside the installed app: swap Download App -> Read the Bible ---------- */
+  if (isStandalone) {
+    document.querySelectorAll("[data-install-app]").forEach(function (btn) {
+      btn.removeAttribute("data-install-app");
+      btn.removeAttribute("aria-haspopup");
+      btn.setAttribute("href", "bible.html");
+      var label = btn.querySelector("span");
+      if (label) label.textContent = "Read the Bible";
+      var icon = btn.querySelector(".btn-icon");
+      if (icon) {
+        icon.innerHTML =
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+      }
+    });
+  }
+
   /* ---------- PWA: install app button + instructions modal ---------- */
   var deferredPrompt = null;
   var overlay = null;
+  var IS_ANDROID = /Android/.test(navigator.userAgent || "");
+  var APK_URL = "the-rest-place.apk";
 
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();
@@ -197,7 +243,10 @@
       "<h3>Get The Rest Place App</h3>" +
       "<p>Sermons, events, giving and the <strong>complete Holy Bible</strong> — installed on your device and available offline.</p>" +
       '<ol class="install-steps">' + stepsHtml + "</ol>" +
-      '<a href="bible.html" class="btn btn--primary">Read the Bible Now</a>' +
+      (IS_ANDROID
+        ? '<a href="the-rest-place.apk" download class="btn btn--primary">Download Android App (.apk)</a>'
+        : '<a href="bible.html" class="btn btn--primary">Read the Bible Now</a>') +
+      '<p style="margin-top:1rem;font-size:.82rem;color:var(--clr-ink-faint)">Tip: in Chrome, the one-tap Install option appears automatically after visiting this site once or twice.</p>' +
       "</div>";
 
     document.body.appendChild(overlay);
@@ -230,10 +279,14 @@
     btn.addEventListener("click", function (e) {
       e.preventDefault();
       if (deferredPrompt) {
+        /* Native install dialog — the app installs directly */
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then(function () {
           deferredPrompt = null;
         });
+      } else if (IS_ANDROID) {
+        /* Real download of the Android app package */
+        window.location.href = APK_URL;
       } else {
         openInstallModal();
       }
