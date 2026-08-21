@@ -200,6 +200,29 @@
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();
     deferredPrompt = e;
+
+    /* Auto-offer the install prompt to new visitors shortly after they
+       arrive — at most once every 7 days, never inside the installed app. */
+    var AUTO_PROMPT_KEY = "trp-auto-install-prompt";
+    var REPROMPT_AFTER = 7 * 24 * 60 * 60 * 1000;
+    var seenRecently = false;
+    try {
+      var last = parseInt(localStorage.getItem(AUTO_PROMPT_KEY), 10);
+      seenRecently = !isNaN(last) && Date.now() - last < REPROMPT_AFTER;
+    } catch (err) { /* private mode */ }
+
+    if (!seenRecently) {
+      setTimeout(function () {
+        if (!deferredPrompt || isStandalone) return;
+        try {
+          localStorage.setItem(AUTO_PROMPT_KEY, String(Date.now()));
+        } catch (err) { /* ignore */ }
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function () {
+          deferredPrompt = null;
+        });
+      }, 3500);
+    }
   });
 
   window.addEventListener("appinstalled", function () {
@@ -287,15 +310,15 @@
   document.querySelectorAll("[data-install-app]").forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
-      if (deferredPrompt) {
+      if (IS_ANDROID) {
+        /* Android: always deliver the real app package */
+        window.location.href = APK_URL;
+      } else if (deferredPrompt) {
         /* Native install dialog — the app installs directly */
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then(function () {
           deferredPrompt = null;
         });
-      } else if (IS_ANDROID) {
-        /* Real download of the Android app package */
-        window.location.href = APK_URL;
       } else {
         openInstallModal();
       }
