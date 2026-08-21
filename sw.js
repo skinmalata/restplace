@@ -5,7 +5,7 @@
    ========================================================================== */
 "use strict";
 
-var CACHE_VERSION = "rest-place-v1.2.0";
+var CACHE_VERSION = "rest-place-v1.2.1";
 
 /* Core shell precached on install.
    js/bible-data.js (~4 MB, the full Bible) is runtime-cached the first

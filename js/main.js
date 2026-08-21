@@ -145,12 +145,16 @@
 
   /* ---------- In-app splash screen (installed app launches) ----------
      Skipped on iOS: the system already displays the identical startup
-     image natively — a second copy here would flash the same artwork twice. */
+     image natively — a second copy here would flash the same artwork twice.
+     Skipped on Android: Chrome draws its own native splash from the
+     manifest before any page code runs; stacking ours after it would
+      mean two splashes back to back. (The APK has a full custom splash.) */
   var IS_IOS =
     /iPad|iPhone|iPod/.test(navigator.userAgent || "") ||
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var IS_ANDROID = /Android/.test(navigator.userAgent || "");
 
-  if (isStandalone && !IS_IOS && !document.querySelector(".app-splash")) {
+  if (isStandalone && !IS_IOS && !IS_ANDROID && !document.querySelector(".app-splash")) {
     var splashEl = document.createElement("div");
     splashEl.className = "app-splash";
     splashEl.innerHTML = '<img src="splash.png" alt="The Rest Place Church">';
@@ -191,7 +195,6 @@
   /* ---------- PWA: install app button + instructions modal ---------- */
   var deferredPrompt = null;
   var overlay = null;
-  var IS_ANDROID = /Android/.test(navigator.userAgent || "");
   var APK_URL = "the-rest-place.apk";
 
   window.addEventListener("beforeinstallprompt", function (e) {
